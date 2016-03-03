@@ -3,6 +3,9 @@ angular.module('dinnerDaddy.location', [])
 .controller('locationController', function ($scope, $location, $cookies, LocationFactory) {
 
   $scope.username = $cookies.get('name');
+  
+  /* Dummy data for user/restaurant distances */
+  $scope.usersInGroup = [];
 
   var verify = function (username) {
     if (navigator.geolocation) {
@@ -10,6 +13,13 @@ angular.module('dinnerDaddy.location', [])
     } else {
       console.error('User rejected location access');
     }
+  };
+
+  $scope.findDistance = function (users) {
+    LocationFactory.findDistance(users)
+    .then(function (distances) {
+      //handle array of distances of each user to the target restaurant
+    })
   };
 
   $scope.updateMode = function (mode) {
