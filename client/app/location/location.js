@@ -84,7 +84,6 @@ so the coordinates for all group members can bubble up from server to each clien
   var success = function (position, username) {
     var usercoordinates = [position.coords.latitude, position.coords.longitude];
 
-
     //gathering coordinates from user geolocation
     var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     //setting up options for new google Maps Marker
@@ -107,16 +106,26 @@ so the coordinates for all group members can bubble up from server to each clien
     var query = {
       origins: [],
       destinations: restaurant.location,
-      travelMode: google.maps.TravelMode.WALKING
+      travelMode: google.maps.TravelMode.WALKING,
+      unitSystem: google.maps.UnitSystem.IMPERIAL
     }
 
+    //preparing all users locations to the query
     for (var i=0; i < userData.length; i++) {
       query.origins.push(userData[i].location)
     }
 
-    console.log('query is : ', query)
+    var distanceMatrix = new google.maps.DistanceMatrixService();
+    var directionService = new google.maps.DirectionsService();
+    var directionRenderer = new google.maps.DirectionsRenderer({preserveViewport: true});
 
+    directionRenderer.setMap(map);
 
+    distanceMatrix.getDistanceMatrix(query, function (response, status) {
+      if (status === 'OK') {
+        console.log('response: ', response.rows)
+      }
+    })
   };
 
   var updateMode = function (mode) {
