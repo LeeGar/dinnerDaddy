@@ -103,29 +103,32 @@ so the coordinates for all group members can bubble up from server to each clien
 
   var getDistance = function (userData, restaurant) {
 
-    var query = {
-      origins: [],
-      destinations: restaurant.location,
-      travelMode: google.maps.TravelMode.WALKING,
-      unitSystem: google.maps.UnitSystem.IMPERIAL
-    }
+    // var query = {
+    //   origins: [],
+    //   destinations: restaurant.location,
+    //   travelMode: google.maps.TravelMode.WALKING,
+    //   unitSystem: google.maps.UnitSystem.IMPERIAL
+    // }
 
-    //preparing all users locations to the query
-    for (var i=0; i < userData.length; i++) {
-      query.origins.push(userData[i].location)
-    }
+    // //preparing all users locations to the query
+    // for (var i=0; i < userData.length; i++) {
+    //   query.origins.push(userData[i].location)
+    // }
 
-    var distanceMatrix = new google.maps.DistanceMatrixService();
-    var directionService = new google.maps.DirectionsService();
-    var directionRenderer = new google.maps.DirectionsRenderer({preserveViewport: true});
+    // var distanceMatrix = new google.maps.DistanceMatrixService();
+    // var directionService = new google.maps.DirectionsService();
+    // var directionRenderer = new google.maps.DirectionsRenderer({preserveViewport: true});
 
-    directionRenderer.setMap(map);
+    // directionRenderer.setMap(map);
 
-    distanceMatrix.getDistanceMatrix(query, function (response, status) {
-      if (status === 'OK') {
-        console.log('response: ', response.rows)
-      }
-    })
+    // var origin1 = new google.maps.LatLng(55.930385, -3.118425)
+    // console.log('origin1: ', origin1)
+
+    // distanceMatrix.getDistanceMatrix(query, function (response, status) {
+    //   if (status === 'OK') {
+    //     console.log('response: ', response.rows)
+    //   }
+    // });
   };
 
   var updateMode = function (mode) {
