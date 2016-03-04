@@ -1,11 +1,8 @@
 angular.module('dinnerDaddy.location', [])
 
-.controller('locationController', function ($scope, $location, $cookies, LocationFactory) {
+.controller('locationController', function ($scope, $rootScope, $location, $cookies, LocationFactory) {
 
   $scope.username = $cookies.get('name');
-  
-  /* Dummy data for user/restaurant distances */
-  $scope.usersInGroup = [];
 
   var verify = function (username) {
     if (navigator.geolocation) {
@@ -34,6 +31,30 @@ angular.module('dinnerDaddy.location', [])
     }
   };
 
+  /* Dummy data for user/restaurant distances */
+  var userData = [
+    {
+      username: 'Gar Lee',
+      location: [38, -122.4]
+    },
+    {
+      username: 'Albert Huynh',
+      location: [37.1, -122.2]
+    },
+    {
+      username: 'Akshay Buddiga',
+      location: [37.2, -122.1]
+    }
+  ]
+
+  var restaurant = {
+    name: 'PhoKing',
+    location: [35, -122]
+  };
+
+  setTimeout(LocationFactory.getDistance(userData, restaurant), 1000)
+  /* ---- End of Dummy data ----- */
+  
   verify();
 })
 
@@ -61,9 +82,11 @@ the coordinates will be fed into the server socket. The deployed version will gi
 so the coordinates for all group members can bubble up from server to each client */
 
   var success = function (position, username) {
+    var usercoordinates = [position.coords.latitude, position.coords.longitude];
+
+
     //gathering coordinates from user geolocation
     var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    
     //setting up options for new google Maps Marker
     var marker = new google.maps.Marker({
       position: coords,
@@ -72,14 +95,27 @@ so the coordinates for all group members can bubble up from server to each clien
     });
     google.maps.event.addListener(marker, 'click', (function (marker) {
       return function () {
-
         info.setContent($cookies.get('name'));
         info.open(map, marker);
       }
     })(marker));
   };
 
-  var getDistance = function () {
+
+  var getDistance = function (userData, restaurant) {
+
+    var query = {
+      origins: [],
+      destinations: restaurant.location,
+      travelMode: google.maps.TravelMode.WALKING
+    }
+
+    for (var i=0; i < userData.length; i++) {
+      query.origins.push(userData[i].location)
+    }
+
+    console.log('query is : ', query)
+
 
   };
 
