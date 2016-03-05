@@ -1,16 +1,10 @@
-<!-- this is the page that users wait in for their freinds to join.
-They will press start when everyone has joined -->
-
 <div id="match" class="container">
-  <p class="center">
+  <div class="welcomesession">
     <span class="bold">Hi, {{ user.username }}!</span>
+    <p>
     Once all your friends are here, click start.
   </p>
-  <div class="join-group-cnt block-center" ng-repeat="session in sessions">
-    <button class="col-xs-12 btn-mobile visible-xs visible-sm" ng-click="startMatching()">Start Matching Movies!</button>
-    <button class="col-xs-12 btn-laptop hidden-xs hidden-sm" ng-click="startMatching()">Start Matching Movies!</button>
-  </div>
-  
+
   <div class="friendsList">
     <ul class="friends" ng-repeat='user in users track by $index'>
       <li class="eachFriend">
@@ -24,6 +18,6 @@ They will press start when everyone has joined -->
   </div>
 
   <div class="startsessionbtn">
-    <button ng-click="startSession( currentSession.id )">Start</button>
+    <button class="btn btn-primary active" ng-click="startSession( currentSession.id )">Start</button>
   </div>
 </div>
