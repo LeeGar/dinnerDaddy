@@ -1,6 +1,6 @@
 angular.module( 'dinnerDaddy.lobby', [] )
 
-.controller('LobbyController', function($scope, $rootScope, $location, Session, Lobby, Socket, Auth, Restaurant) {
+.controller('LobbyController', function ($scope, $rootScope, $location, Session, Lobby, Socket, Auth, Restaurant) {
   $scope.users = [];
   $rootScope.currentSession;
   $rootScope.restaurants;

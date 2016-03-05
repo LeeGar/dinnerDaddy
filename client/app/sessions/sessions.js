@@ -4,7 +4,7 @@ angular.module('dinnerDaddy.sessions', [])
   $rootScope.currentSession;
   $rootScope.user;
   $scope.sessions = [];
-  $scope.friends = [];
+  $rootScope.friends = [];
 
   $scope.sessionName = '';
 
@@ -21,7 +21,7 @@ angular.module('dinnerDaddy.sessions', [])
   var getFriends = function(userId) {
     Session.getFriends(userId)
     .then(function(friends) {
-      $scope.friends = friends;
+      $rootScope.friends = friends;
     });
   };
 
