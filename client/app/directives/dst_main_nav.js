@@ -3,9 +3,12 @@ angular.module( 'dinnerDaddy.directive', [] )
 .directive ('dstMainNav',  function( ) {
     return {
       restrict: 'E',
-      controller: function( $scope, Session, Auth ) {
+      controller: function($scope, $rootScope, Session, Auth) {
         $scope.expand = false;
         $scope.lastEventType;
+
+        
+
         // Session.getSession()
         // .then( function( session ) {
         //   $scope.sessionName = session.sessionName;
